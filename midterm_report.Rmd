@@ -1,0 +1,22 @@
+---
+title: "DATA 550: Midterm Report"
+subtitle: NBA Player Stats
+authors: Ivanna de Anda, Danielle Hawk, Emily Wilhelm
+date: "`r Sys.Date()`"
+params: 
+  file_name: "raw_data/nba_2025-10-30"
+---
+
+```{r, load-packages}
+
+###Unsure which packages need to be loaded - we can update as we go!
+
+```
+
+```{r, load-data}
+
+here::i_am("midterm_report.Rmd")
+
+nba <- read.delim(params$file_name, header = TRUE, sep = ",")
+
+```
