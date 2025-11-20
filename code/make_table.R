@@ -2,10 +2,17 @@ here::i_am(
   "code/make_table.R"
 )
 
+# We should set this up in renv so installation is not necessary
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages("gtExtras")
+
 library(dplyr)
+library(gt)
+library(gtExtras)
+
 
 #load data
-NBA_Data <- read.table("./raw_data/nba_2025-10-30.txt", header = TRUE, sep = ",")
+NBA_Data <- readRDS("output/nba.rds")
 
 #get 5 youngest and oldest players
 youngest_players <- NBA_Data[order(NBA_Data$Age)[1:5],]

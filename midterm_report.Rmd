@@ -1,13 +1,13 @@
 ---
 title: "DATA 550: Midterm Report"
 subtitle: NBA Player Stats
-authors: Ivanna de Anda, Danielle Hawk, Emily Wilhelm
+author: Ivanna de Anda, Danielle Hawk, Emily Wilhelm
 date: "`r Sys.Date()`"
+output: html_document
 params: 
-  file_name: "raw_data/nba_2025-10-30"
 ---
 
-```{r, load-packages}
+```{r load-packages, include = FALSE}
 
 ###Unsure which packages need to be loaded - we can update as we go!
 library(ggplot2)
@@ -16,11 +16,9 @@ library(gt)
 library(gtExtras)
 ```
 
-```{r, load-data}
+```{r here, include = FALSE}
 
 here::i_am("midterm_report.Rmd")
-
-nba <- read.delim(params$file_name, header = TRUE, sep = ",")
 
 ```
 
@@ -32,7 +30,7 @@ grouped_ages <- readRDS(
 
 ```
 
-```{r, players-table}
+```{r players-table, echo = FALSE}
 grouped_ages %>%
   select(
     age_group,
@@ -46,6 +44,10 @@ grouped_ages %>%
   ) %>% 
   arrange(Age) %>%
   gt() %>%
+  tab_header(
+    title = md("**Top 5 Youngest and Oldest Player Stats**"),
+    subtitle = "2025 NBA Data"
+  ) %>%
   tab_style(
     style = cell_text(color = "#3B9CFF"),
     locations = cells_body(
