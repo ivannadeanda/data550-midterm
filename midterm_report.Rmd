@@ -10,7 +10,10 @@ params:
 ```{r, load-packages}
 
 ###Unsure which packages need to be loaded - we can update as we go!
-
+library(ggplot2)
+library(dplyr)
+library(gt)
+library(gtExtras)
 ```
 
 ```{r, load-data}
@@ -20,3 +23,45 @@ here::i_am("midterm_report.Rmd")
 nba <- read.delim(params$file_name, header = TRUE, sep = ",")
 
 ```
+
+```{r, load-youngest-and-oldest-players, include = FALSE}
+
+grouped_ages <- readRDS(
+  here::here("output/grouped_ages.rds")
+)
+
+```
+
+```{r, players-table}
+grouped_ages %>%
+  select(
+    age_group,
+    Player = Player,
+    Age = Age,
+    "Ranking" = Rk, 
+    "2 Pt. Shots" = X2P,
+    "2 Pt. Shot Attempts" = X2PA, 
+    "3 Pt. Shots" = X3P,
+    "3 Pt. Shot Attempts" = X3PA
+  ) %>% 
+  arrange(Age) %>%
+  gt() %>%
+  tab_style(
+    style = cell_text(color = "#3B9CFF"),
+    locations = cells_body(
+      columns = Player,
+      rows = age_group == "youngest5"
+    )
+  ) %>%
+  tab_style(
+    style = cell_text(color = "darkblue"),
+    locations = cells_body(
+      columns = Player,
+      rows = age_group == "oldest5"
+    )
+  ) %>%
+  cols_hide(columns = age_group) %>% 
+  gt_theme_espn()
+
+```
+
