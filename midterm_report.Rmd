@@ -67,3 +67,11 @@ grouped_ages %>%
 
 ```
 
+```{r freethrow-figure, echo = FALSE}
+
+knitr::include_graphics(
+  here::here("output/nba_freethrows.png")
+)
+
+```
+

@@ -1,5 +1,5 @@
 nba_midterm_report.html: code/render_report.R load_data \
-  make_table
+  make_table make_figure
 	Rscript code/render_report.R
 	
 .PHONY: load_data
@@ -12,8 +12,8 @@ make_table: code/make_table.R load_data
 	
 ##This needs to be updated with Danielle's code
 .PHONY: make_figure
-make_figure: code/02_temp_figure.R output/nighttime_hourly.rds
-	Rscript code/02_temp_figure.R
+make_figure: code/make_graph.R load_data
+	Rscript code/make_graph.R
 
 .PHONY: clean
 clean:
