@@ -4,33 +4,34 @@ subtitle: NBA Player Stats
 author: Ivanna de Anda, Danielle Hawk, Emily Wilhelm
 date: "`r Sys.Date()`"
 output: html_document
-params: 
 ---
 
-```{r load-packages, include = FALSE}
+```{r, read-config, include = FALSE}
+config_list <- config::get()
+```
 
-###Unsure which packages need to be loaded - we can update as we go!
+```{r load-packages, eval = config_list$production}
 library(ggplot2)
 library(dplyr)
 library(gt)
 library(gtExtras)
 ```
 
-```{r here, include = FALSE}
+```{r here, eval = config_list$production}
 
 here::i_am("midterm_report.Rmd")
 
 ```
 
-```{r, load-youngest-and-oldest-players, include = FALSE}
+```{r, load-youngest-and-oldest-players, eval = config_list$production}
 
 grouped_ages <- readRDS(
   here::here("output/grouped_ages.rds")
 )
 
 ```
-
-```{r players-table, echo = FALSE}
+# Youngest and Oldest Player Stats
+```{r players-table, eval = config_list$production}
 grouped_ages %>%
   select(
     age_group,
@@ -67,7 +68,8 @@ grouped_ages %>%
 
 ```
 
-```{r freethrow-figure, echo = FALSE}
+# Free Throw Stats by Team
+```{r freethrow-figure, eval = config_list$production}
 
 knitr::include_graphics(
   here::here("output/nba_freethrows.png")

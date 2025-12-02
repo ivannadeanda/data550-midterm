@@ -1,0 +1,11 @@
+# Produces report without raw code in it - only tables/figures
+
+default:
+  production: TRUE
+  
+# Produces report with raw code as well as tables/figures
+
+test: 
+  production: FALSE
+  
+  
